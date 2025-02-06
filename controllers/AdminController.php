@@ -6,7 +6,7 @@
 class AdminController {
 
     /**
-     * Affiche la page d'administration.
+     * Affiche la page d'administration : Edition des articles.
      * @return void
      */
     public function showAdmin() : void
@@ -18,9 +18,29 @@ class AdminController {
         $articleManager = new ArticleManager();
         $articles = $articleManager->getAllArticles();
 
-        // On affiche la page d'administration.
+        // On affiche la page d'edition des artciles'.
         $view = new View("Administration");
         $view->render("admin", [
+            'articles' => $articles
+        ]);
+    }
+
+    /**
+     * Affiche la page d'administration : Monitoring.
+     * @return void
+     */
+    public function showMonitoring() : void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        $this->checkIfUserIsConnected();
+
+        // On récupère les articles.
+        $articleManager = new ArticleManager();
+        $articles = $articleManager->getAllArticles();
+
+        // On affiche la page de monitoring.
+        $view = new View("Monitoring");
+        $view->render("monitoring", [
             'articles' => $articles
         ]);
     }
