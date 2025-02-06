@@ -26,10 +26,14 @@ class ArticleController
 
         $articleManager = new ArticleManager();
         $article = $articleManager->getArticleById($id);
-        
+                
         if (!$article) {
             throw new Exception("L'article demandé n'existe pas.");
         }
+        
+        //update nb vue lorsque la page de l'article est demandée
+        $article->setNbVue($article->getNbVue()+1);
+        $articleManager->updateNbVueArticle($article);
 
         $commentManager = new CommentManager();
         $comments = $commentManager->getAllCommentsByArticleId($id);

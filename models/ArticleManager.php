@@ -92,4 +92,18 @@ class ArticleManager extends AbstractEntityManager
         $sql = "DELETE FROM article WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
     }
+
+    /**
+     * Ajout methode pour incrémenter le nb de vue sur chaque article
+     * @param Article $article
+     * @return void
+     */
+    public function updateNbVueArticle(Article $article) : void
+    {
+        $sql = "UPDATE article SET nb_vue = :nb_vue WHERE id = :id";
+        $this->db->query($sql, [
+            'nb_vue' => $article->getNbVue(),
+            'id' => $article->getId()
+        ]);
+    }
 }
