@@ -311,6 +311,7 @@ a.info {
     margin-bottom: 20px;
     background-color: var(--commentPaleColor);
     color: white;
+    width: 100%;
 }
 
 .articleLine {
@@ -333,6 +334,23 @@ a.info {
 }
 
 .articleLine > div {
+    padding: 20px;
+    border: 1px solid var(--backgroundColor);
+}
+
+/**
+* Ajout class tableau statistiques
+*/
+
+.tableMonitoring{
+    color: white;
+    background-color: var(--commentPaleColor);
+    text-align: left;
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+.tableLine th, td{
     padding: 20px;
     border: 1px solid var(--backgroundColor);
 }

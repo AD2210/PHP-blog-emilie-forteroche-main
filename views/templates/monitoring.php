@@ -8,9 +8,9 @@
 <h2>Statistiques des articles</h2>
 
 <div>
-    <table class="adminArticle">
-        <thead class="articleLine">
-            <tr>
+    <table class="tableMonitoring">
+        <thead>
+            <tr class="tableLine">
                 <th scope="col">Titre</th>
                 <th scope="col">Publié le</th>
                 <th scope="col">Nb de vue</th>
@@ -19,11 +19,11 @@
         </thead>
         <tbody>
             <?php foreach ($articles as $article) { ?>
-            <tr class="articleLine">
+            <tr class="tableLine">
                 <th scope="row" class="title"><?= $article->getTitle() ?></th>
-                <td class="content"><?= $article->getNbVue() ?></td>
-                <td class="content"><?= $article->getNbVue() ?></td>
-                <td class="content"><?= $article->getNbVue() ?></td>
+                <td><?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></td>
+                <td><?= $article->getNbVue() ?></td>
+                <td><?= count($commentManager->getAllCommentsByArticleId($article->getId())) ?></td>
             </tr>
             <?php } ?>
         </tbody>
