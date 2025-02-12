@@ -18,5 +18,7 @@
     <?php } ?>
 </div>
 
-<a class="submit" href="index.php?action=showUpdateArticleForm">Ajouter un article</a>
-<a class="submit" href="index.php?action=showMonitoring">Afficher les statistiques</a>
+<div class="navAdmin">
+    <a class="submit" href="index.php?action=showUpdateArticleForm">Ajouter un article</a>
+    <a class="submit" href="index.php?action=showMonitoring">Afficher les statistiques</a>
+</div>

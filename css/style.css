@@ -342,17 +342,30 @@ a.info {
 * Ajout class tableau statistiques
 */
 
+.navAdmin{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
 .tableMonitoring{
     color: white;
     background-color: var(--commentPaleColor);
     text-align: left;
     border-collapse: collapse;
     width: 1000px;
+    margin-bottom: 20px;
 }
 
 .tableLine th, td{
     padding: 20px;
-    border: 1px solid var(--backgroundColor);
+    border: 2px solid var(--backgroundColor);
+}
+
+.headLine{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /** 
