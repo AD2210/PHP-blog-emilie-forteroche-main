@@ -37,7 +37,7 @@ class AdminController {
         // On récupère les articles.
         $articleManager = new ArticleManager();
         $commentManager = new CommentManager();
-        $articles = $articleManager->getAllArticles();
+        $articles = $articleManager->getAllArticles('title', 'ASC');
 
         // On affiche la page de monitoring.
         $view = new View("Monitoring");
@@ -199,5 +199,4 @@ class AdminController {
         Utils::redirect("admin");
     }
 
-    
 }
