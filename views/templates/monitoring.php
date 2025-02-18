@@ -51,6 +51,7 @@
     <tbody>
         
         <?php
+        //Variable permettant d'avoir le numero de ligne et différencier l'affichage des lignes paire et impaire grace à leur classe respective
         $i = 0;
         foreach ($datas as $data) { 
         $i++;
@@ -59,7 +60,12 @@
             <th scope="row" class="title"><?= $data['title'] ?></th>
             <td><?= Utils::convertDateToFrenchFormat($data['date_creation']) ?></td>
             <td><?= $data['nb_vue'] ?></td>
-            <td><?= $data['nb_comment'] ?></td>
+            <td>
+                <div class="com">   
+                    <?= $data['nb_comment'] ?>
+                    <a class="submit" href="index.php?action=admin">Gerer</a>
+                </div> 
+            </td>
         </tr>
         <?php } ?>
     </tbody>
