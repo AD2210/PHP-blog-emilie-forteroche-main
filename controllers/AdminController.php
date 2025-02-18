@@ -29,7 +29,7 @@ class AdminController {
      * Affiche la page d'administration : Monitoring.
      * @return void
      */
-    public function showMonitoring() : void
+    public function showMonitoring(string $order = 'id', string $direction ='ASC') : void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
@@ -37,13 +37,26 @@ class AdminController {
         // On récupère les articles.
         $articleManager = new ArticleManager();
         $commentManager = new CommentManager();
-        $articles = $articleManager->getAllArticles('title', 'ASC');
+        $articles = $articleManager->getAllArticles($order, $direction);
+
+        //contruction du tableau de data associé avec les différentes tables utilisés :
+        //Article et commentaires
+        foreach ($articles as $article){
+            $datas[]=[
+                'id' => $article->getId(),
+                'title' => $article->getTitle(),
+                'date_creation' => $article->getDateCreation(),
+                'nb_vue' => $article->getNbVue(),
+                'nb_comment' => count($commentManager->getAllCommentsByArticleId($article->getId()))
+            ];
+        }
+
+        // tri parametré de notre tableau
 
         // On affiche la page de monitoring.
         $view = new View("Monitoring");
         $view->render("monitoring", [
-            'articles' => $articles,
-            'commentManager' => $commentManager
+            'datas' => $datas
         ]);
     }
 

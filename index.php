@@ -6,6 +6,8 @@ require_once 'config/autoload.php';
 // On récupère l'action demandée par l'utilisateur.
 // Si aucune action n'est demandée, on affiche la page d'accueil.
 $action = Utils::request('action', 'home');
+$order = Utils::request('order', 'id'); //ajout parametre order et direction pour filtre du tableau de stats
+$direction = Utils::request('direction', 'ASC');
 
 // Try catch global pour gérer les erreurs
 try {
@@ -46,7 +48,7 @@ try {
 
         case 'showMonitoring':  // ajout de la page monitoring
             $adminController = new AdminController();
-            $adminController->showMonitoring();
+            $adminController->showMonitoring($order, $direction);
             break;
 
         case 'connectionForm':
@@ -54,7 +56,7 @@ try {
             $adminController->displayConnectionForm();
             break;
 
-        case 'connectUser': 
+        case 'connectUser':
             $adminController = new AdminController();
             $adminController->connectUser();
             break;

@@ -51,12 +51,12 @@
     <tbody>
         
         <?php 
-        foreach ($articles as $article) { ?>
+        foreach ($datas as $data) { ?>
         <tr class="tableLine">
-            <th scope="row" class="title"><?= $article->getTitle() ?></th>
-            <td><?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></td>
-            <td><?= $article->getNbVue() ?></td>
-            <td><?= count($commentManager->getAllCommentsByArticleId($article->getId())) ?></td>
+            <th scope="row" class="title"><?= $data['title'] ?></th>
+            <td><?= Utils::convertDateToFrenchFormat($data['date_creation']) ?></td>
+            <td><?= $data['nb_vue'] ?></td>
+            <td><?= $data['nb_comment'] ?></td>
         </tr>
         <?php } ?>
     </tbody>
