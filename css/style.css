@@ -378,8 +378,20 @@ a.info {
 
 .headLine{
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.headLine a{
+    display: inline;
+    border: #f1f0eb 1px solid;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.headLine a:hover{
+    cursor: pointer;
+    color:#255E33;
 }
 
 /** 

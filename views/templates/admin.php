@@ -8,8 +8,13 @@
 <h2>Edition des articles</h2>
 
 <div class="adminArticle">
-    <?php foreach ($articles as $article) { ?>
-        <div class="articleLine">
+    <?php 
+    //Variable permettant d'avoir le numero de ligne et différencier l'affichage des lignes paire et impaire grace à leur classe respective
+    $i = 0;
+    foreach ($articles as $article) { 
+        $i++;
+        ?>
+        <div class="articleLine <?php echo (($i%2 == 0) ? 'lignePaire' : 'ligneImpaire'); ?>">
             <div class="title"><?= $article->getTitle() ?></div>
             <div class="content"><?= $article->getContent(200) ?></div>
             <div><a class="submit" href="index.php?action=showUpdateArticleForm&id=<?= $article->getId() ?>">Modifier</a></div>
