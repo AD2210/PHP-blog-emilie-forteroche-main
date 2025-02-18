@@ -29,10 +29,14 @@ class AdminController {
      * Affiche la page d'administration : Monitoring.
      * @return void
      */
-    public function showMonitoring(string $order = 'title', string $direction ='ASC') : void
+    public function showMonitoring() : void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
+
+        //On récupère les variables passées dans l'url
+        $order = Utils::request('order', 'title'); //ajout parametre order et direction pour filtre du tableau de stats
+        $direction = Utils::request('direction', 'ASC');
 
         // On récupère les articles.
         $articleManager = new ArticleManager();
@@ -43,6 +47,7 @@ class AdminController {
         //Article et commentaires
         foreach ($articles as $article){
             $datas[]=[
+                'id' => $article->getId(),
                 'title' => $article->getTitle(),
                 'date_creation' => $article->getDateCreation(),
                 'nb_vue' => $article->getNbVue(),
@@ -83,6 +88,28 @@ class AdminController {
         $view = new View("Monitoring");
         $view->render("monitoring", [
             'datas' => $datas
+        ]);
+    }
+
+    public function commentManagement() : void
+    {
+        // On vérifie que l'utilisateur est connecté.
+        $this->checkIfUserIsConnected();
+
+        //On récupère les variables passées dans l'url
+        $id = Utils::request('id', -1);
+
+        // On récupère les titres des articles les commentaires.
+        $articleManager = new ArticleManager();
+        $commentManager = new CommentManager();
+        $article = $articleManager->getArticleTitleById(intval($id));
+        $comments = $commentManager->getAllCommentsByArticleId(intval($id));
+
+        // On affiche la page d'edition des artciles'.
+        $view = new View("Administration");
+        $view->render("commentManagement", [
+            'comments' => $comments,
+            'article' => $article
         ]);
     }
 
@@ -236,6 +263,24 @@ class AdminController {
        
         // On redirige vers la page d'administration.
         Utils::redirect("admin");
+    }
+
+    /**
+     * Suppression d'un commentaire
+     * @return void
+     */
+    public function deleteComment() : void
+    {
+        $this->checkIfUserIsConnected();
+
+        $id = Utils::request("id", -1);
+        var_dump(intval($id));
+        // On supprime le commentaire.
+        $commentManager = new CommentManager();
+        $commentManager->deleteComment($id);
+       
+        // On redirige vers la page d'administration.
+        Utils::redirect("showMonitoring");
     }
 
 }

@@ -107,4 +107,15 @@ class ArticleManager extends AbstractEntityManager
         ]);
     }
 
+    /**
+     * Selectionne le titre d'un article grâce à son id
+     * @param int $id
+     */
+    public function getArticleTitleById(int $id) : mixed {
+        $sql = "SELECT title FROM article WHERE id= :id";
+        $result = $this->db->query($sql,['id'=>$id]);
+
+        return $result->fetch();
+    }
+
 }

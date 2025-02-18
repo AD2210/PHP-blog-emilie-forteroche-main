@@ -63,7 +63,7 @@
             <td>
                 <div class="com">   
                     <?= $data['nb_comment'] ?>
-                    <a class="submit" href="index.php?action=admin">Gerer</a>
+                    <a class="submit" href="index.php?action=commentManagement&id=<?php echo($data['id']) ?>">Gerer</a>
                 </div> 
             </td>
         </tr>
