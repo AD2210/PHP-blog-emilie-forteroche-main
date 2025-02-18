@@ -34,8 +34,8 @@ class AdminController {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
 
-        //On récupère les variables passées dans l'url
-        $order = Utils::request('order', 'title'); //ajout parametre order et direction pour filtre du tableau de stats
+        //On récupère la colonne à trié et le sens
+        $order = Utils::request('order', 'title');
         $direction = Utils::request('direction', 'ASC');
 
         // On récupère les articles.
@@ -105,7 +105,7 @@ class AdminController {
         $article = $articleManager->getArticleTitleById(intval($id));
         $comments = $commentManager->getAllCommentsByArticleId(intval($id));
 
-        // On affiche la page d'edition des artciles'.
+        // On affiche la page d'edition des articles'.
         $view = new View("Administration");
         $view->render("commentManagement", [
             'comments' => $comments,
@@ -274,7 +274,7 @@ class AdminController {
         $this->checkIfUserIsConnected();
 
         $id = Utils::request("id", -1);
-        var_dump(intval($id));
+
         // On supprime le commentaire.
         $commentManager = new CommentManager();
         $commentManager->deleteComment($id);
