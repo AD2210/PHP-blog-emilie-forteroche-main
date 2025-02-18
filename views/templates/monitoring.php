@@ -50,9 +50,12 @@
     </thead>
     <tbody>
         
-        <?php 
-        foreach ($datas as $data) { ?>
-        <tr class="tableLine">
+        <?php
+        $i = 0;
+        foreach ($datas as $data) { 
+        $i++;
+            ?>
+        <tr class="tableLine <?php echo (($i%2 == 0) ? 'lignePaire' : 'ligneImpaire'); ?>" >
             <th scope="row" class="title"><?= $data['title'] ?></th>
             <td><?= Utils::convertDateToFrenchFormat($data['date_creation']) ?></td>
             <td><?= $data['nb_vue'] ?></td>

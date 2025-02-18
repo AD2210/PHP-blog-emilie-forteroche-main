@@ -50,32 +50,33 @@ class AdminController {
             ];
         }
 
-        // tri parametré de notre tableau
-        $direction = $direction == 'ASC' ? SORT_ASC : SORT_DESC; // définition de l'ordre du tri
+        // tri parametré de notre tableau avec Multisort qui a l'avantage de garder les correspondance dans un tableau multidim
+        $direction = $direction == 'DESC' ? SORT_DESC : SORT_ASC; // définition de l'ordre du tri, ASC par défaut
         $title = array_column($datas,'title'); //on tranforme le tableau de ligne en tableau de colonne pour multisort
         $date_creation = array_column($datas,'date_creation');
         $nb_vue = array_column($datas,'nb_vue');
         $nb_comment = array_column($datas,'nb_comment');
-        switch ($order){
+
+        switch ($order){ // le switch permet de choisir le parametre de tri : 1er arg de multisort
             // tri par titre
             case 'title' :
-                array_multisort($title,intval($direction),$date_creation,$nb_vue,$nb_comment,$datas);
+                array_multisort($title,$direction,$date_creation,$nb_vue,$nb_comment,$datas);
                 break;
             // tri par date de creation
             case 'date_creation' :
-                array_multisort($date_creation,intval($direction),$title,$nb_vue,$nb_comment,$datas);
+                array_multisort($date_creation,$direction,$title,$nb_vue,$nb_comment,$datas);
                 break;
             //trie par nb de vue
             case 'nb_vue' :
-                array_multisort($nb_vue,intval($direction),$title,$date_creation,$nb_comment,$datas);
+                array_multisort($nb_vue,$direction,$title,$date_creation,$nb_comment,$datas);
                 break;
             //trie par nb de commentaire
             case 'nb_comment' :
-                array_multisort($nb_comment,intval($direction),$title,$nb_vue,$date_creation,$datas);
+                array_multisort($nb_comment,$direction,$title,$nb_vue,$date_creation,$datas);
                 break;
             
             default:
-            array_multisort($title,intval($direction),$date_creation,$nb_vue,$nb_comment,$datas);
+            array_multisort($title,$direction,$date_creation,$nb_vue,$nb_comment,$datas);
         }
 
         // On affiche la page de monitoring avec le tableau trié en fonction de la demande utilisateur.

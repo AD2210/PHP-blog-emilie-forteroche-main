@@ -362,6 +362,14 @@ a.info {
     border: 2px solid var(--backgroundColor);
 }
 
+.lignePaire{
+    background-color: var(--commentPaleColor);
+}
+
+.ligneImpaire{
+    background-color: color-mix(in srgb, var(--commentPaleColor) 100%, white 50%);
+}
+
 .headLine{
     display: flex;
     flex-direction: column;
