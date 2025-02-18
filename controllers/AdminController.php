@@ -29,7 +29,7 @@ class AdminController {
      * Affiche la page d'administration : Monitoring.
      * @return void
      */
-    public function showMonitoring(string $order = 'id', string $direction ='ASC') : void
+    public function showMonitoring(string $order = 'title', string $direction ='ASC') : void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
@@ -37,13 +37,12 @@ class AdminController {
         // On récupère les articles.
         $articleManager = new ArticleManager();
         $commentManager = new CommentManager();
-        $articles = $articleManager->getAllArticles($order, $direction);
+        $articles = $articleManager->getAllArticles();
 
         //contruction du tableau de data associé avec les différentes tables utilisés :
         //Article et commentaires
         foreach ($articles as $article){
             $datas[]=[
-                'id' => $article->getId(),
                 'title' => $article->getTitle(),
                 'date_creation' => $article->getDateCreation(),
                 'nb_vue' => $article->getNbVue(),
@@ -52,8 +51,34 @@ class AdminController {
         }
 
         // tri parametré de notre tableau
+        $direction = $direction == 'ASC' ? SORT_ASC : SORT_DESC; // définition de l'ordre du tri
+        $title = array_column($datas,'title'); //on tranforme le tableau de ligne en tableau de colonne pour multisort
+        $date_creation = array_column($datas,'date_creation');
+        $nb_vue = array_column($datas,'nb_vue');
+        $nb_comment = array_column($datas,'nb_comment');
+        switch ($order){
+            // tri par titre
+            case 'title' :
+                array_multisort($title,intval($direction),$date_creation,$nb_vue,$nb_comment,$datas);
+                break;
+            // tri par date de creation
+            case 'date_creation' :
+                array_multisort($date_creation,intval($direction),$title,$nb_vue,$nb_comment,$datas);
+                break;
+            //trie par nb de vue
+            case 'nb_vue' :
+                array_multisort($nb_vue,intval($direction),$title,$date_creation,$nb_comment,$datas);
+                break;
+            //trie par nb de commentaire
+            case 'nb_comment' :
+                array_multisort($nb_comment,intval($direction),$title,$nb_vue,$date_creation,$datas);
+                break;
+            
+            default:
+            array_multisort($title,intval($direction),$date_creation,$nb_vue,$nb_comment,$datas);
+        }
 
-        // On affiche la page de monitoring.
+        // On affiche la page de monitoring avec le tableau trié en fonction de la demande utilisateur.
         $view = new View("Monitoring");
         $view->render("monitoring", [
             'datas' => $datas

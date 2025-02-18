@@ -14,8 +14,8 @@
                 <div class="headLine">  
                     <div>Titre</div>
                     <div>
-                        <a href="#">crois</a>
-                        <a href="#">decrois</a>
+                        <a href="index.php?action=showMonitoring&order=title&direction=ASC">crois</a>
+                        <a href="index.php?action=showMonitoring&order=title&direction=DESC">decrois</a>
                     </div>
                 </div>      
             </th>
@@ -23,8 +23,8 @@
                 <div class="headLine">    
                     <div>Publié le</div>
                     <div>
-                        <a href="#">crois</a>
-                        <a href="#">decrois</a>
+                        <a href="index.php?action=showMonitoring&order=date_creation&direction=ASC">crois</a>
+                        <a href="index.php?action=showMonitoring&order=date_creation&direction=DESC">decrois</a>
                     </div>
                 </div>
             </th>
@@ -32,8 +32,8 @@
                 <div class="headLine">    
                     <div>Vues</div>
                     <div>
-                        <a href="#">crois</a>
-                        <a href="#">decrois</a>
+                        <a href="index.php?action=showMonitoring&order=nb_vue&direction=ASC">crois</a>
+                        <a href="index.php?action=showMonitoring&order=nb_vue&direction=DESC">decrois</a>
                     </div>
                 </div>
             </th>
@@ -41,8 +41,8 @@
                 <div class="headLine">    
                     <div>Commentaires</div>
                     <div>
-                        <a href="#">crois</a>
-                        <a href="#">decrois</a>
+                        <a href="index.php?action=showMonitoring&order=nb_comment&direction=ASC">crois</a>
+                        <a href="index.php?action=showMonitoring&order=nb_comment&direction=DESC">decrois</a>
                     </div>
                 </div>
             </th>
