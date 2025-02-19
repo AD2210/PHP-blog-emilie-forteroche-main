@@ -1,7 +1,7 @@
 <?php
-    /**
-     * Template pour afficher une page d'erreur.
-     */
+/**
+ * Template pour afficher une page d'erreur.
+ */
 ?>
 
 <div class="error">

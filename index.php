@@ -21,8 +21,8 @@ try {
             $articleController = new ArticleController();
             $articleController->showApropos();
             break;
-        
-        case 'showArticle': 
+
+        case 'showArticle':
             $articleController = new ArticleController();
             $articleController->showArticle();
             break;
@@ -39,7 +39,7 @@ try {
 
 
         // Section admin & connexion. 
-        case 'admin': 
+        case 'admin':
             $adminController = new AdminController();
             $adminController->showAdmin();
             break;
@@ -49,9 +49,9 @@ try {
             $adminController->showMonitoring();
             break;
 
-        case 'commentManagement' : //ajout de la page comment management pour supprimer les commentaires
+        case 'commentManagement': //ajout de la page comment management pour supprimer les commentaires
             $adminController = new AdminController();
-            $adminController->commentManagement();
+            $adminController->showCommentManagement();
             break;
 
         case 'connectionForm':
@@ -74,7 +74,7 @@ try {
             $adminController->showUpdateArticleForm();
             break;
 
-        case 'updateArticle': 
+        case 'updateArticle':
             $adminController = new AdminController();
             $adminController->updateArticle();
             break;

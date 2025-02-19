@@ -1,15 +1,16 @@
-<?php 
+<?php
 /**
  * Contrôleur de la partie admin.
  */
- 
-class AdminController {
+
+class AdminController
+{
 
     /**
      * Affiche la page d'administration : Edition des articles.
      * @return void
      */
-    public function showAdmin() : void
+    public function showAdmin(): void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
@@ -29,7 +30,7 @@ class AdminController {
      * Affiche la page d'administration : Monitoring.
      * @return void
      */
-    public function showMonitoring() : void
+    public function showMonitoring(): void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
@@ -45,8 +46,8 @@ class AdminController {
 
         //contruction du tableau de data associé avec les différentes tables utilisés :
         //Article et commentaires
-        foreach ($articles as $article){
-            $datas[]=[
+        foreach ($articles as $article) {
+            $datas[] = [
                 'id' => $article->getId(),
                 'title' => $article->getTitle(),
                 'date_creation' => $article->getDateCreation(),
@@ -57,31 +58,31 @@ class AdminController {
 
         // tri parametré de notre tableau avec Multisort qui a l'avantage de garder les correspondance dans un tableau multidim
         $direction = $direction == 'DESC' ? SORT_DESC : SORT_ASC; // définition de l'ordre du tri, ASC par défaut
-        $title = array_column($datas,'title'); //on tranforme le tableau de ligne en tableau de colonne pour multisort
-        $date_creation = array_column($datas,'date_creation');
-        $nb_vue = array_column($datas,'nb_vue');
-        $nb_comment = array_column($datas,'nb_comment');
+        $title = array_column($datas, 'title'); //on tranforme le tableau de ligne en tableau de colonne pour multisort
+        $dateCreation = array_column($datas, 'date_creation');
+        $nbVue = array_column($datas, 'nb_vue');
+        $nbComment = array_column($datas, 'nb_comment');
 
-        switch ($order){ // le switch permet de choisir le parametre de tri : 1er arg de multisort
+        switch ($order) { // le switch permet de choisir le parametre de tri : 1er arg de multisort
             // tri par titre
-            case 'title' :
-                array_multisort($title,$direction,$date_creation,$nb_vue,$nb_comment,$datas);
+            case 'title':
+                array_multisort($title, $direction, $dateCreation, $nbVue, $nbComment, $datas);
                 break;
             // tri par date de creation
-            case 'date_creation' :
-                array_multisort($date_creation,$direction,$title,$nb_vue,$nb_comment,$datas);
+            case 'date_creation':
+                array_multisort($dateCreation, $direction, $title, $nbVue, $nbComment, $datas);
                 break;
             //trie par nb de vue
-            case 'nb_vue' :
-                array_multisort($nb_vue,$direction,$title,$date_creation,$nb_comment,$datas);
+            case 'nb_vue':
+                array_multisort($nbVue, $direction, $title, $dateCreation, $nbComment, $datas);
                 break;
             //trie par nb de commentaire
-            case 'nb_comment' :
-                array_multisort($nb_comment,$direction,$title,$nb_vue,$date_creation,$datas);
+            case 'nb_comment':
+                array_multisort($nbComment, $direction, $title, $nbVue, $dateCreation, $datas);
                 break;
-            
+
             default:
-            array_multisort($title,$direction,$date_creation,$nb_vue,$nb_comment,$datas);
+                array_multisort($title, $direction, $dateCreation, $nbVue, $nbComment, $datas);
         }
 
         // On affiche la page de monitoring avec le tableau trié en fonction de la demande utilisateur.
@@ -91,7 +92,7 @@ class AdminController {
         ]);
     }
 
-    public function commentManagement() : void
+    public function showCommentManagement(): void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
@@ -117,7 +118,7 @@ class AdminController {
      * Vérifie que l'utilisateur est connecté.
      * @return void
      */
-    private function checkIfUserIsConnected() : void
+    private function checkIfUserIsConnected(): void
     {
         // On vérifie que l'utilisateur est connecté.
         if (!isset($_SESSION['user'])) {
@@ -129,7 +130,7 @@ class AdminController {
      * Affichage du formulaire de connexion.
      * @return void
      */
-    public function displayConnectionForm() : void 
+    public function displayConnectionForm(): void
     {
         $view = new View("Connexion");
         $view->render("connectionForm");
@@ -139,7 +140,7 @@ class AdminController {
      * Connexion de l'utilisateur.
      * @return void
      */
-    public function connectUser() : void 
+    public function connectUser(): void
     {
         // On récupère les données du formulaire.
         $login = Utils::request("login");
@@ -175,7 +176,7 @@ class AdminController {
      * Déconnexion de l'utilisateur.
      * @return void
      */
-    public function disconnectUser() : void 
+    public function disconnectUser(): void
     {
         // On déconnecte l'utilisateur.
         unset($_SESSION['user']);
@@ -188,7 +189,7 @@ class AdminController {
      * Affichage du formulaire d'ajout d'un article.
      * @return void
      */
-    public function showUpdateArticleForm() : void 
+    public function showUpdateArticleForm(): void
     {
         $this->checkIfUserIsConnected();
 
@@ -216,7 +217,7 @@ class AdminController {
      * On sait si un article est ajouté car l'id vaut -1.
      * @return void
      */
-    public function updateArticle() : void 
+    public function updateArticle(): void
     {
         $this->checkIfUserIsConnected();
 
@@ -251,7 +252,7 @@ class AdminController {
      * Suppression d'un article.
      * @return void
      */
-    public function deleteArticle() : void
+    public function deleteArticle(): void
     {
         $this->checkIfUserIsConnected();
 
@@ -260,7 +261,7 @@ class AdminController {
         // On supprime l'article.
         $articleManager = new ArticleManager();
         $articleManager->deleteArticle($id);
-       
+
         // On redirige vers la page d'administration.
         Utils::redirect("admin");
     }
@@ -269,7 +270,7 @@ class AdminController {
      * Suppression d'un commentaire
      * @return void
      */
-    public function deleteComment() : void
+    public function deleteComment(): void
     {
         $this->checkIfUserIsConnected();
 
@@ -278,7 +279,7 @@ class AdminController {
         // On supprime le commentaire.
         $commentManager = new CommentManager();
         $commentManager->deleteComment($id);
-       
+
         // On redirige vers la page d'administration.
         Utils::redirect("showMonitoring");
     }

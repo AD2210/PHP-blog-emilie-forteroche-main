@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Ce fichier est le template principal qui "contient" ce qui aura été généré par les autres vues.  
  * 
@@ -10,6 +10,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,23 +23,24 @@
         <nav>
             <a href="index.php">Articles</a>
             <a href="index.php?action=apropos">À propos</a>
-            <?php 
-                // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion : 
-                if (isset($_SESSION['user'])) {
-                    echo '<a href="index.php?action=disconnectUser">Déconnexion</a>';
-                }
-                ?>
+            <?php
+            // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion : 
+            if (isset($_SESSION['user'])) {
+                echo '<a href="index.php?action=disconnectUser">Déconnexion</a>';
+            }
+            ?>
         </nav>
         <h1>Emilie Forteroche</h1>
     </header>
 
-    <main>    
+    <main>
         <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
     </main>
-    
+
     <footer>
         <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=admin">Admin</a>
     </footer>
 
 </body>
+
 </html>
