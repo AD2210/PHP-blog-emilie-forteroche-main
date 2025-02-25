@@ -47,8 +47,8 @@ class CommentManager extends AbstractEntityManager
     {
         $sql = "INSERT INTO comment (pseudo, content, id_article, date_creation) VALUES (:pseudo, :content, :idArticle, NOW())";
         $result = $this->db->query($sql, [
-            'pseudo' => $comment->getPseudo(),
-            'content' => $comment->getContent(),
+            'pseudo' => htmlspecialchars($comment->getPseudo()), // Ajout function pour eviter faille XSS
+            'content' => htmlspecialchars($comment->getContent()),
             'idArticle' => $comment->getIdArticle()
         ]);
         return $result->rowCount() > 0;

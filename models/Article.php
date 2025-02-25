@@ -11,7 +11,7 @@ class Article extends AbstractEntity
     private string $content = "";
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;
-    private int $nbVue;
+    private int $nbVue = 0;
 
     /**
      * Setter pour l'id de l'utilisateur. 

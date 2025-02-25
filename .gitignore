@@ -1,1 +1,10 @@
 config/config.php
+desktop.ini
+config/desktop.ini
+controllers/desktop.ini
+models/desktop.ini
+css/desktop.ini
+services/desktop.ini
+views/desktop.ini
+views/templates/desktop.ini
+favicon.ico

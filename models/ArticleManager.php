@@ -59,11 +59,11 @@ class ArticleManager extends AbstractEntityManager
      */
     public function addArticle(Article $article): void
     {
-        $sql = "INSERT INTO article (id_user, title, content, date_creation) VALUES (:id_user, :title, :content, NOW())";
+        $sql = "INSERT INTO article (id_user, title, content, date_creation, date_update, nb_vue) VALUES (:id_user, :title, :content, NOW(), NOW(), 0)";
         $this->db->query($sql, [
             'id_user' => $article->getIdUser(),
-            'title' => $article->getTitle(),
-            'content' => $article->getContent()
+            'title' => htmlspecialchars($article->getTitle()),  // Ajout function pour eviter faille XSS
+            'content' => htmlspecialchars($article->getContent())
         ]);
     }
 
@@ -76,8 +76,8 @@ class ArticleManager extends AbstractEntityManager
     {
         $sql = "UPDATE article SET title = :title, content = :content, date_update = NOW() WHERE id = :id";
         $this->db->query($sql, [
-            'title' => $article->getTitle(),
-            'content' => $article->getContent(),
+            'title' => htmlspecialchars($article->getTitle()),  // Ajout function pour eviter faille XSS
+            'content' => htmlspecialchars($article->getContent()),
             'id' => $article->getId()
         ]);
     }
