@@ -31,6 +31,8 @@
         foreach ($comments as $comment) {
             $commentDetail = 'Le ' .Utils::convertDateToFrenchFormat($comment->getDateCreation()) .', ' .Utils::format($comment->getPseudo()) .'a écrit :';
             $commentContent = Utils::format($comment->getContent());
+            
+            // PHP Heredoc pour afficher les variables récupérés.
             $showComment = <<<COMMENT
                 <li>
                     <div class="smiley">☻</div>

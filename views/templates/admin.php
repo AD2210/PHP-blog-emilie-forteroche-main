@@ -13,16 +13,25 @@
     $i = 0;
     foreach ($articles as $article) {
         $i++;
-        ?>
-        <div class="articleLine <?php echo (($i % 2 == 0) ? 'lignePaire' : 'ligneImpaire'); ?>">
-            <div class="title"><?= $article->getTitle() ?></div>
-            <div class="content"><?= $article->getContent(200) ?></div>
-            <div><a class="submit" href="index.php?action=showUpdateArticleForm&id=<?= $article->getId() ?>">Modifier</a>
+        $colorLine = ($i % 2 == 0) ? 'lignePaire' : 'ligneImpaire';
+        $title = $article->getTitle();
+        $content = $article->getContent(200);
+        $id = $article->getId();
+        $confirmation = Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer cet article ?");
+        
+        // PHP Heredoc pour afficher les variables récupérés.
+        $showArticle = <<<ARTICLE
+            <div class="articleLine $colorLine">
+                <div class="title">$title</div>
+                    <div class="content">$content</div>
+                    <div><a class="submit" href="index.php?action=showUpdateArticleForm&id=$id">Modifier</a></div>
+                    <div>
+                        <a class="submit" href="index.php?action=deleteArticle&id=$id" $confirmation>Supprimer</a>
+                </div>
             </div>
-            <div><a class="submit" href="index.php?action=deleteArticle&id=<?= $article->getId() ?>"
-                    <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer cet article ?") ?>>Supprimer</a></div>
-        </div>
-    <?php } ?>
+            ARTICLE;
+        echo $showArticle;
+    } ?>
 </div>
 
 <div class="navAdmin">

@@ -39,20 +39,29 @@
         $i = 0;
         foreach ($comments as $comment) {
             $i++;
-            ?>
-            <tr class="tableLine <?php echo (($i % 2 == 0) ? 'lignePaire' : 'ligneImpaire'); ?>">
-                <th scope="row" class="title"><?= $comment->getPseudo() ?></th>
-                <td><?= Utils::convertDateToFrenchFormat($comment->getDateCreation()) ?></td>
-                <td><?= $comment->getContent() ?></td>
-                <td>
-                    <div>
-                        <a class="submit" href="index.php?action=deleteComment&id=<?= $comment->getId() ?>"
-                            <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce commentaire ?") ?>>Supprimer</a>
-                    </div>
-                    </div>
-                </td>
-            </tr>
-        <?php } ?>
+            $colorLine = ($i % 2 == 0) ? 'lignePaire' : 'ligneImpaire';
+            $pseudo = $comment->getPseudo();
+            $dateCreation = Utils::convertDateToFrenchFormat($comment->getDateCreation());
+            $commentContent = $comment->getContent();
+            $id = $comment->getId();
+            $confirmation = Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer ce commentaire ?");
+
+            // PHP Heredoc pour afficher les variables récupérés.
+            $tableLine = <<<TABLE
+                <tr class="tableLine $colorLine">
+                    <th scope="row" class="title">$pseudo</th>
+                    <td>$dateCreation</td>
+                    <td>$commentContent</td>
+                    <td>
+                        <div>
+                            <a class="submit" href="index.php?action=deleteComment&id=$id" $confirmation>Supprimer</a>
+                        </div>
+                        </div>
+                    </td>
+                </tr>
+            TABLE;
+            echo $tableLine;
+        } ?>
     </tbody>
 </table>
 
