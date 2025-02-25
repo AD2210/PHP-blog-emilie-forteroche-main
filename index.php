@@ -17,9 +17,9 @@ try {
             $articleController->showHome();
             break;
 
-        case 'apropos':
+        case 'about':
             $articleController = new ArticleController();
-            $articleController->showApropos();
+            $articleController->showAbout();
             break;
 
         case 'showArticle':

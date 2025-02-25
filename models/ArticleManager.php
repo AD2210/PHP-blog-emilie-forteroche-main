@@ -53,13 +53,14 @@ class ArticleManager extends AbstractEntityManager
     }
 
     /**
-     * Ajoute un article.
+     * Ajoute un article. On défini par défaut la date de mise à jour à la date de création pour eviter les erreurs en BDD, idem pour le nombre de vue
      * @param Article $article : l'article à ajouter.
      * @return void
      */
     public function addArticle(Article $article): void
     {
-        $sql = "INSERT INTO article (id_user, title, content, date_creation, date_update, nb_vue) VALUES (:id_user, :title, :content, NOW(), NOW(), 0)";
+        $sql = "INSERT INTO article (id_user, title, content, date_creation, date_update, nb_vue) 
+            VALUES (:id_user, :title, :content, NOW(), NOW(), 0)";
         $this->db->query($sql, [
             'id_user' => $article->getIdUser(),
             'title' => htmlspecialchars($article->getTitle()),  // Ajout function pour eviter faille XSS
@@ -76,7 +77,7 @@ class ArticleManager extends AbstractEntityManager
     {
         $sql = "UPDATE article SET title = :title, content = :content, date_update = NOW() WHERE id = :id";
         $this->db->query($sql, [
-            'title' => htmlspecialchars($article->getTitle()),  // Ajout function pour eviter faille XSS
+            'title' => htmlspecialchars($article->getTitle()),  // Ajout function htmlspecialchars pour eviter faille XSS
             'content' => htmlspecialchars($article->getContent()),
             'id' => $article->getId()
         ]);

@@ -44,8 +44,8 @@ class AdminController
         $commentManager = new CommentManager();
         $articles = $articleManager->getAllArticles();
 
-        //contruction du tableau de data associé avec les différentes tables utilisés :
-        //Article et commentaires
+        // Contruction du tableau de data associé avec les différentes tables utilisézs :
+        // Article et commentaires
         foreach ($articles as $article) {
             $datas[] = [
                 'id' => $article->getId(),
@@ -56,27 +56,27 @@ class AdminController
             ];
         }
 
-        // tri parametré de notre tableau avec Multisort qui a l'avantage de garder les correspondance dans un tableau multidim
-        $direction = $direction == 'DESC' ? SORT_DESC : SORT_ASC; // définition de l'ordre du tri, ASC par défaut
-        $title = array_column($datas, 'title'); //on tranforme le tableau de ligne en tableau de colonne pour multisort
+        // Tri parametré de notre tableau avec Multisort qui a l'avantage de garder les correspondance dans un tableau multidim
+        $direction = $direction == 'DESC' ? SORT_DESC : SORT_ASC; // Définition de l'ordre du tri, ASC par défaut
+        $title = array_column($datas, 'title'); // On tranforme le tableau de ligne en tableau de colonne pour multisort
         $dateCreation = array_column($datas, 'date_creation');
         $nbVue = array_column($datas, 'nb_vue');
         $nbComment = array_column($datas, 'nb_comment');
 
-        switch ($order) { // le switch permet de choisir le parametre de tri : 1er arg de multisort
-            // tri par titre
+        switch ($order) { // Le switch permet de choisir le parametre de tri : 1er arg de multisort
+            // Tri par titre
             case 'title':
                 array_multisort($title, $direction, $dateCreation, $nbVue, $nbComment, $datas);
                 break;
-            // tri par date de creation
+            // Tri par date de creation
             case 'date_creation':
                 array_multisort($dateCreation, $direction, $title, $nbVue, $nbComment, $datas);
                 break;
-            //trie par nb de vue
+            // Trie par nb de vue
             case 'nb_vue':
                 array_multisort($nbVue, $direction, $title, $dateCreation, $nbComment, $datas);
                 break;
-            //trie par nb de commentaire
+            // Trie par nb de commentaire
             case 'nb_comment':
                 array_multisort($nbComment, $direction, $title, $nbVue, $dateCreation, $datas);
                 break;
@@ -107,7 +107,7 @@ class AdminController
         $comments = $commentManager->getAllCommentsByArticleId(intval($id));
 
         // On affiche la page d'edition des articles'.
-        $view = new View("Administration");
+        $view = new View("Gestion commentaires");
         $view->render("commentManagement", [
             'comments' => $comments,
             'article' => $article
@@ -280,7 +280,7 @@ class AdminController
         $commentManager = new CommentManager();
         $commentManager->deleteComment($id);
 
-        // On redirige vers la page d'administration.
+        // On redirige vers la page des statistiques.
         Utils::redirect("showMonitoring");
     }
 

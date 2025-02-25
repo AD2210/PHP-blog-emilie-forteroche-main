@@ -120,11 +120,10 @@ class Article extends AbstractEntity
 
     /**
      * Getter pour la date de mise à jour.
-     * Grâce au setter, on a la garantie de récupérer un objet DateTime ou null
-     * si la date de mise à jour n'a pas été définie.
+     * Grâce au setter, on a la garantie de récupérer un objet DateTime
      * @return DateTime|null
      */
-    public function getDateUpdate(): ?DateTime
+    public function getDateUpdate(): DateTime
     {
         return $this->dateUpdate;
     }

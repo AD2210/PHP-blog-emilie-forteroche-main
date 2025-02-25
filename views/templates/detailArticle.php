@@ -21,21 +21,29 @@
 <div class="comments">
     <h2 class="commentsTitle">Vos Commentaires</h2>
     <?php
+    $noCommentMsg = <<<MSG
+        <p class="info">Aucun commentaire pour cet article.</p>
+    MSG;
     if (empty($comments)) {
-        echo '<p class="info">Aucun commentaire pour cet article.</p>';
+        echo $noCommentMsg;
     } else {
         echo '<ul>';
         foreach ($comments as $comment) {
-            echo '<li>';
-            echo '  <div class="smiley">☻</div>';
-            echo '  <div class="detailComment">';
-            echo '      <h3 class="info">Le ' . Utils::convertDateToFrenchFormat($comment->getDateCreation()) . ", " . Utils::format($comment->getPseudo()) . ' a écrit :</h3>';
-            echo '      <p class="content">' . Utils::format($comment->getContent()) . '</p>';
-            echo '  </div>';
-            echo '</li>';
+            $commentDetail = 'Le ' .Utils::convertDateToFrenchFormat($comment->getDateCreation()) .', ' .Utils::format($comment->getPseudo()) .'a écrit :';
+            $commentContent = Utils::format($comment->getContent());
+            $showComment = <<<COMMENT
+                <li>
+                    <div class="smiley">☻</div>
+                    <div class="detailComment">
+                        <h3 class="info">$commentDetail</h3>
+                        <p class="content">$commentContent</p>
+                    </div>
+                </li>
+            COMMENT;
+            echo $showComment;
         }
         echo '</ul>';
-    }
+        }
     ?>
 
     <form action="index.php" method="post" class="foldedCorner">
