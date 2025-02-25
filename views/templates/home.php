@@ -5,16 +5,26 @@
 ?>
 
 <div class="articleList">
-    <?php foreach ($articles as $article) { ?>
-        <article class="article">
-            <h2><?= $article->getTitle() ?></h2>
-            <span class="quotation">«</span>
-            <p><?= $article->getContent(400) ?></p>
+    <?php foreach ($articles as $article) {
+        $title = $article->getTitle();
+        $articleContent = $article->getContent(400);
+        $dateCreation = ucfirst(Utils::convertDateToFrenchFormat($article->getDateCreation()));
+        $id = $article->getId();
 
-            <div class="footer">
-                <span class="info"> <?= ucfirst(Utils::convertDateToFrenchFormat($article->getDateCreation())) ?></span>
-                <a class="info" href="index.php?action=showArticle&id=<?= $article->getId() ?>">Lire +</a>
-            </div>
-        </article>
-    <?php } ?>
+        // Heredoc pour afficher les variables récupérés
+        $showArticle = <<<ARTICLE
+            <article class="article">
+                <h2>$title</h2>
+                <span class="quotation">«</span>
+                <p>$articleContent</p>
+
+                <div class="footer">
+                    <span class="info">$dateCreation</span>
+                    <a class="info" href="index.php?action=showArticle&id=$id">Lire +</a>
+                </div>
+            </article> 
+        ARTICLE;
+        echo $showArticle;
+    } 
+    ?>
 </div>

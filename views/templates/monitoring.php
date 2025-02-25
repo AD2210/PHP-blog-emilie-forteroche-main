@@ -55,19 +55,29 @@
         $i = 0;
         foreach ($datas as $data) {
             $i++;
-            ?>
-            <tr class="tableLine <?php echo ($i % 2 == 0) ? 'lignePaire' : 'ligneImpaire'; ?>">
-                <th scope="row" class="title"><?= $data['title'] ?></th>
-                <td><?= Utils::convertDateToFrenchFormat($data['date_creation']) ?></td>
-                <td><?= $data['nb_vue'] ?></td>
-                <td>
-                    <div class="com">
-                        <?= $data['nb_comment'] ?>
-                        <a class="submit" href="index.php?action=commentManagement&id=<?php echo ($data['id']) ?>">Gerer</a>
-                    </div>
-                </td>
-            </tr>
-        <?php } ?>
+            $colorLine = ($i % 2 == 0) ? 'lignePaire' : 'ligneImpaire';
+            $title = $data['title'];
+            $nbVue = $data['nb_vue'];
+            $nbComment = $data['nb_comment'];
+            $id = $data['id'];
+            $dateCreation = Utils::convertDateToFrenchFormat($data['date_creation']);
+
+            // HereDoc pour afficher les variables récupérés
+            $tableLine = <<<TABLE
+                <tr class="tableLine $colorLine">
+                    <th scope="row" class="title">$title</th>
+                    <td>$dateCreation</td>
+                    <td>$nbVue</td>
+                    <td>
+                        <div class="com">
+                            $nbComment
+                            <a class="submit" href="index.php?action=commentManagement&id=$id">Gerer</a>
+                        </div>
+                    </td>
+                </tr>
+            TABLE;
+            echo $tableLine;
+        } ?>
     </tbody>
 </table>
 
