@@ -18,7 +18,7 @@
         $content = $article->getContent(200);
         $id = $article->getId();
         $confirmation = Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer cet article ?");
-        
+
         // PHP Heredoc pour afficher les variables récupérés.
         $showArticle = <<<ARTICLE
             <div class="articleLine $colorLine">

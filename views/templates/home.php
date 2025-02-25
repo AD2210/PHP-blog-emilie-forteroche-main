@@ -25,6 +25,6 @@
             </article> 
         ARTICLE;
         echo $showArticle;
-    } 
+    }
     ?>
 </div>
