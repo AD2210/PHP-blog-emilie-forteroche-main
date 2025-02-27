@@ -28,7 +28,7 @@
         echo $noCommentMsg;
     } else { ?>
         <ul>
-            <? foreach ($comments as $comment) {
+            <?php foreach ($comments as $comment) {
                 $commentDetail = 'Le ' . Utils::convertDateToFrenchFormat($comment->getDateCreation()) . ', ' . Utils::format($comment->getPseudo()) . 'a écrit :';
                 $commentContent = Utils::format($comment->getContent());
 
@@ -45,7 +45,7 @@
                 echo $showComment;
             } ?>
         </ul>
-    <? } ?>
+    <?php } ?>
 
     <form action="index.php" method="post" class="foldedCorner">
         <h2>Commenter</h2>
