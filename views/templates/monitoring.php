@@ -13,7 +13,7 @@
             <th scope="col">
                 <div class="headLine">
                     <div>Titre</div>
-                    <div>
+                    <div class ="filterButton">
                         <a href="index.php?action=showMonitoring&order=title&direction=ASC">↑</a>
                         <a href="index.php?action=showMonitoring&order=title&direction=DESC">↓</a>
                     </div>
@@ -22,7 +22,7 @@
             <th scope="col">
                 <div class="headLine">
                     <div>Publié le</div>
-                    <div>
+                    <div class ="filterButton">
                         <a href="index.php?action=showMonitoring&order=date_creation&direction=ASC">↑</a>
                         <a href="index.php?action=showMonitoring&order=date_creation&direction=DESC">↓</a>
                     </div>
@@ -31,7 +31,7 @@
             <th scope="col">
                 <div class="headLine">
                     <div>Vues</div>
-                    <div>
+                    <div class ="filterButton">
                         <a href="index.php?action=showMonitoring&order=nb_vue&direction=ASC">↑</a>
                         <a href="index.php?action=showMonitoring&order=nb_vue&direction=DESC">↓</a>
                     </div>
@@ -40,7 +40,7 @@
             <th scope="col">
                 <div class="headLine">
                     <div>Commentaires</div>
-                    <div>
+                    <div class ="filterButton">
                         <a href="index.php?action=showMonitoring&order=nb_comment&direction=ASC">↑</a>
                         <a href="index.php?action=showMonitoring&order=nb_comment&direction=DESC">↓</a>
                     </div>

@@ -12,7 +12,7 @@
 
     <div class="footer">
         <span class="info"> Publié le <?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></span>
-        <?php if ($article->getDateUpdate() != null) { ?>
+        <?php if ($article->getDateUpdate() != $article->getDateCreation()) { ?>
             <span class="info"> Modifié le <?= Utils::convertDateToFrenchFormat($article->getDateUpdate()) ?></span>
         <?php } ?>
     </div>
